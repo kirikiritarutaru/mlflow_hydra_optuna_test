@@ -1,8 +1,0 @@
-dataset:
-  mnist:
-    batch_size: 128
-    epoch: 10
-optimizer:
-  adam:
-    beta: 0.1
-    lr: 0.1

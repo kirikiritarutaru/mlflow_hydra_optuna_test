@@ -1,0 +1,8 @@
+dataset:
+  cifar10:
+    batch_size: 64
+    epoch: 100
+optimizer:
+  adam:
+    beta: 0.1
+    lr: 0.1

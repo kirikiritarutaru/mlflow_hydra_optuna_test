@@ -1,0 +1,2 @@
+- dataset=mnist
+- optimizer=sgd

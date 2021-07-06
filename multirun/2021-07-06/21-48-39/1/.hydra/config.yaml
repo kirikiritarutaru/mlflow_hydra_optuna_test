@@ -1,0 +1,6 @@
+model:
+  node1: 128
+  node2: 32
+optimizer:
+  lr: 0.001
+  momentum: 0.9

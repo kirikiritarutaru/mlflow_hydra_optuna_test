@@ -63,7 +63,8 @@ def main(cfg):
 
             # log param
             log_params_from_omegaconf_dict(cfg)
-            for i, (x, y) in enumerate(trainloader):
+            for i, data in enumerate(trainloader):
+                x, y = data
                 steps = epoch * len(trainloader) + i
                 optimizer.zero_grad()
 

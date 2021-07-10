@@ -1,5 +1,4 @@
-import os
-import sys
+import warnings
 
 import hydra
 import mlflow
@@ -7,11 +6,14 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from hydra import utils
-from model import SAMPLE_DNN
 from omegaconf import DictConfig, ListConfig
-from torch.utils.data import DataLoader, random_split
+from torch.utils.data import DataLoader
 from torchvision import transforms
 from torchvision.datasets import MNIST
+
+from model import SAMPLE_DNN
+
+warnings.simplefilter('ignore', UserWarning)
 
 
 def log_params_from_omegaconf_dict(params):
@@ -33,12 +35,19 @@ def _explore_recursive(parent_name, element):
 
 @hydra.main(config_path='conf', config_name='config_example')
 def main(cfg):
-    dataset = MNIST(
+    train = MNIST(
         '~/src/mlflow_hydra_optuna_test',
         download=True,
+        train=True,
         transform=transforms.ToTensor()
     )
-    train, val = random_split(dataset, [55000, 5000])
+
+    val = MNIST(
+        '~/src/mlflow_hydra_optuna_test',
+        download=True,
+        train=False,
+        transform=transforms.ToTensor()
+    )
 
     trainloader = DataLoader(
         train, batch_size=cfg.train.batch_size, shuffle=True
@@ -95,3 +104,4 @@ def main(cfg):
 
 if __name__ == '__main__':
     main()
+    print('Finished!')

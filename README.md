@@ -9,14 +9,17 @@ hydra >= 1.0に対応
 
 ### コマンドラインからの値の変更
 
-`$ python train.py model.node1=64`
+`$ python mlflow_hydra_example.py model.node1=256 model.node2=128`
 
-### ハイパラのグリッドサーチ
+### ハイパーパラメータのグリッドサーチ
 
-`$ python train.py --multirun model.node1=128,256 model.node2=16,32`
+`$ python mlflow_hydra_example.py --multirun model.node1=128,256 train.epoch=5,10`
 
+## optuna
 
+### optunaを用いたハイパーパラメータの探索
 
+`$ python mlflow_hydra_example.py --multirun 'optimizer.lr=choice(0.1, 0.01, 0.001, 0.0001)' 'model.node1=range(10, 500)'`
 
 
 ## 参考

@@ -38,6 +38,8 @@ mlflow ui
 
 ### optunaを用いたハイパーパラメータの探索
 
+`mlflow_hydra_example.py`内で`config_example` → `MHO_config`に変更
+
 ```bash
 python mlflow_hydra_example.py --multirun 'optimizer.lr=choice(0.1, 0.01, 0.001, 0.0001)' 'model.node1=range(10, 500)'
 ```

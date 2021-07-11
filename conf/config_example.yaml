@@ -14,4 +14,4 @@ test:
   batch_size: 64
 
 mlflow:
-  runname: 'optuna_sample'
+  runname: 'grid_search'

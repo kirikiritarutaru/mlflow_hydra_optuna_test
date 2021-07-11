@@ -1,5 +1,5 @@
 # mlflow_hydra_optuna_test
-mlflow, hydra, optunaを用いたハイパーパラメータ管理
+[mlflow](https://www.mlflow.org/docs/latest/index.html), [hydra](https://hydra.cc/docs/intro), [optuna](https://optuna.readthedocs.io/en/stable/)を用いたハイパーパラメータ管理
 
 hydra >= 1.0に対応
 

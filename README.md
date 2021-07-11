@@ -5,8 +5,11 @@ hydra >= 1.0に対応
 
 # 準備
 `$ pip install hydra-core hydra-optuna-sweeper mlflow optuna torch torchvision`
+
 `$ mkdir ~/src`
+
 `$ cd ~/src`
+
 src下にクローン
 
 
@@ -23,8 +26,10 @@ src下にクローン
 ## mlflow
 
 `$ python mlflow_example.py`
+
 `$ mlflow ui`
-http://localhost:5000を開いて結果を確認
+
+[localhost](http://localhost:5000) を開いて結果を確認
 
 ## optuna
 

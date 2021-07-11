@@ -7,11 +7,11 @@ optimizer:
   momentum: 0.9
 
 train:
-  epoch: 1
+  epoch: 50
   batch_size: 64
 
 test:
   batch_size: 64
 
 mlflow:
-  runname: 'optuna_sample'
+  runname: 'hydra_sample'

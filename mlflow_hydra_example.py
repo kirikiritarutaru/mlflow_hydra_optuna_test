@@ -37,16 +37,12 @@ def _explore_recursive(parent_name, element):
 def main(cfg):
     train = MNIST(
         '~/src/mlflow_hydra_optuna_test',
-        download=True,
-        train=True,
-        transform=transforms.ToTensor()
+        download=True, train=True, transform=transforms.ToTensor()
     )
 
     val = MNIST(
         '~/src/mlflow_hydra_optuna_test',
-        download=True,
-        train=False,
-        transform=transforms.ToTensor()
+        download=True, train=False, transform=transforms.ToTensor()
     )
 
     trainloader = DataLoader(
@@ -54,8 +50,10 @@ def main(cfg):
     )
     testloader = DataLoader(val, batch_size=cfg.test.batch_size, shuffle=False)
 
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
     # load model
-    model = SAMPLE_DNN(cfg)
+    model = SAMPLE_DNN(cfg).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(
         model.parameters(),
@@ -68,21 +66,20 @@ def main(cfg):
     mlflow.set_experiment(cfg.mlflow.runname)
     with mlflow.start_run():
         for epoch in range(cfg.train.epoch):
-            running_loss = 0.0
-
             # log param
             log_params_from_omegaconf_dict(cfg)
             for i, data in enumerate(trainloader):
                 x, y = data
+                x = x.to(device)
+                y = y.to(device)
                 steps = epoch * len(trainloader) + i
-                optimizer.zero_grad()
 
-                outputs = model(x)
+                outputs = model(x).to(device)
                 loss = criterion(outputs, y)
+
+                optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-
-                running_loss += loss.item()
 
                 # log metric
                 mlflow.log_metric("loss", loss.item(), step=steps)
@@ -91,7 +88,9 @@ def main(cfg):
             total = 0
             with torch.no_grad():
                 for (x, y) in testloader:
-                    outputs = model(x)
+                    x = x.to(device)
+                    y = y.to(device)
+                    outputs = model(x).to(device)
                     _, predicted = torch.max(outputs.data, 1)
                     total += y.size(0)
                     correct += (predicted == y).sum().item()

@@ -3,17 +3,28 @@ mlflow, hydra, optunaを用いたハイパーパラメータ管理
 
 hydra >= 1.0に対応
 
+# 準備
+`$ pip install hydra-core hydra-optuna-sweeper mlflow optuna torch torchvision`
+`$ mkdir ~/src`
+`$ cd ~/src`
+src下にクローン
 
 
 ## hydra
 
 ### コマンドラインからの値の変更
 
-`$ python mlflow_hydra_example.py model.node1=256 model.node2=128`
+`$ python hydra_example.py model.node1=256 model.node2=128`
 
 ### ハイパーパラメータのグリッドサーチ
 
 `$ python mlflow_hydra_example.py --multirun model.node1=128,256 train.epoch=5,10`
+
+## mlflow
+
+`$ python mlflow_example.py`
+`$ mlflow ui`
+http://localhost:5000を開いて結果を確認
 
 ## optuna
 

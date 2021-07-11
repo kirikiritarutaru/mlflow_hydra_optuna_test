@@ -36,12 +36,13 @@ def _explore_recursive(parent_name, element):
 @hydra.main(config_path='conf', config_name='config_example')
 def main(cfg):
     train = MNIST(
-        '~/src/mlflow_hydra_optuna_test',
+        utils.get_original_cwd(),
         download=True, train=True, transform=transforms.ToTensor()
     )
+    print(utils.get_original_cwd())
 
     val = MNIST(
-        '~/src/mlflow_hydra_optuna_test',
+        utils.get_original_cwd(),
         download=True, train=False, transform=transforms.ToTensor()
     )
 

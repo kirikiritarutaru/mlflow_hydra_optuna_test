@@ -44,6 +44,18 @@ mlflow ui
 python mlflow_hydra_example.py --multirun 'optimizer.lr=choice(0.1, 0.01, 0.001, 0.0001)' 'model.node1=range(10, 500)'
 ```
 
+## hydra_optuna_sweeper
+
+### hydra_optuna_sweeperを用いた探索
+- HOS_config.yaml に探索範囲を設定
+```bash
+python hydra_optuna_sweeper_example.py --multirun
+```
+
+- コマンドラインから探索範囲の設定
+```bash
+python hydra_optuna_sweeper_example.py --multirun y=range(-10, 10)
+```
 
 ## 参考
 

@@ -46,7 +46,7 @@ python mlflow_hydra_example.py --multirun 'optimizer.lr=choice(0.1, 0.01, 0.001,
 
 ## hydra_optuna_sweeper
 
-### hydra_optuna_sweeperを用いた探索
+### hydra_optuna_sweeperを用いた parameter 探索
 - HOS_config.yaml に探索範囲を設定
 ```bash
 python hydra_optuna_sweeper_example.py --multirun
@@ -55,6 +55,14 @@ python hydra_optuna_sweeper_example.py --multirun
 - コマンドラインから探索範囲の設定
 ```bash
 python hydra_optuna_sweeper_example.py --multirun y=range(-10, 10)
+```
+
+### hydra_optuna_sweeperを用いた multi objective parameter 探索
+
+- HOS_multi_objective_config.yaml に探索範囲を設定
+- `binh_and_korn` を呼ぶ
+```bash
+python hydra_optuna_sweeper_example.py --multirun
 ```
 
 ## 参考

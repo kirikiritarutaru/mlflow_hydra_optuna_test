@@ -1,6 +1,8 @@
 defaults:
   - override hydra/sweeper: optuna
   - override hydra/sweeper/sampler: tpe
+  - override hydra/job_logging: colorlog
+  - override hydra/hydra_logging: colorlog
 
 hydra:
   sweeper:
